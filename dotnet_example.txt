@@ -1,0 +1,21 @@
+class Program
+{
+	static void Main()
+	{
+		string filePath = "example.txt";
+
+		// Write text to a file
+		File.WriteAllText(filePath, "Hello, World!");
+
+		// Read text from a file
+		string content = File.ReadAllText(filePath);
+		Console.WriteLine("File Content: " + content);
+
+		// Append text to a file
+		File.AppendAllText(filePath, "\nAppended Text");
+
+		// Read updated content
+		string updatedContent = File.ReadAllText(filePath);
+		Console.WriteLine("Updated File Content: " + updatedContent);
+	}
+}
