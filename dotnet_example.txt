@@ -1,21 +1,29 @@
-class Program
-{
-	static void Main()
-	{
-		string filePath = "example.txt";
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.nio.charset.StandardCharsets;
 
-		// Write text to a file
-		File.WriteAllText(filePath, "Hello, World!");
+public class Program {
+    public static void main(String[] args) {
+        String filePath = "example.txt";
 
-		// Read text from a file
-		string content = File.ReadAllText(filePath);
-		Console.WriteLine("File Content: " + content);
+        try {
+            // Write text to a file
+            Files.write(Paths.get(filePath), "Hello, World!".getBytes(StandardCharsets.UTF_8));
 
-		// Append text to a file
-		File.AppendAllText(filePath, "\nAppended Text");
+            // Read text from a file
+            String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+            System.out.println("File Content: " + content);
 
-		// Read updated content
-		string updatedContent = File.ReadAllText(filePath);
-		Console.WriteLine("Updated File Content: " + updatedContent);
-	}
+            // Append text to a file
+            Files.write(Paths.get(filePath), "\nAppended Text".getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+
+            // Read updated content
+            String updatedContent = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+            System.out.println("Updated File Content: " + updatedContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
